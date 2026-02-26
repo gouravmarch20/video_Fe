@@ -107,10 +107,12 @@ class WebRTCService {
 
   stopRecording(type) {
     return new Promise((resolve) => {
-      if (this.mediaRecorders[type]) {
+      if (this.mediaRecorders[type] && this.mediaRecorders[type].state !== 'inactive') {
         this.mediaRecorders[type].onstop = () => {
           const mimeType = type.includes('audio') ? 'audio/webm' : 'video/webm';
           const blob = new Blob(this.recordedChunks[type], { type: mimeType });
+          this.recordedChunks[type] = [];
+          this.mediaRecorders[type] = null;
           resolve(blob);
         };
         this.mediaRecorders[type].stop();

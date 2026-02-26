@@ -8,6 +8,7 @@ export default function ReviewPage() {
   const meetId = params.meetId;
   const [recordings, setRecordings] = useState([]);
   const [loading, setLoading] = useState(true);
+  console.log("debug___98" , recordings)
 
   useEffect(() => {
     const fetchRecordings = async () => {
@@ -23,16 +24,7 @@ export default function ReviewPage() {
     fetchRecordings();
   }, [meetId]);
 
-  const groupedRecordings = recordings.reduce((acc, rec) => {
-    const key = `${rec.userId}-${rec.recordingType.replace('_audio', '')}`;
-    if (!acc[key]) acc[key] = {};
-    if (rec.recordingType.includes('audio')) {
-      acc[key].audio = rec;
-    } else {
-      acc[key].video = rec;
-    }
-    return acc;
-  }, {});
+
 
   if (loading) {
     return (
@@ -72,35 +64,16 @@ export default function ReviewPage() {
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {Object.entries(groupedRecordings).map(([key, { video, audio }]) => (
-              <div key={key} className="bg-gray-800 rounded-xl p-5 shadow-xl hover:shadow-2xl transition-all border border-gray-700">
+            {recordings.map((rec) => (
+              <div key={rec._id} className="bg-gray-800 rounded-xl p-5 shadow-xl hover:shadow-2xl transition-all border border-gray-700">
                 <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-white text-lg font-semibold">
-                    {video?.userName || audio?.userName}
-                  </h3>
+                  <h3 className="text-white text-lg font-semibold">{rec.userName}</h3>
                   <span className="bg-blue-600 text-white text-xs px-3 py-1 rounded-full font-bold">
-                    {video?.recordingType || audio?.recordingType.replace('_audio', '')}
+                    {rec.recordingType}
                   </span>
                 </div>
                 
-                {video && (
-                  <div className="mb-4">
-                    <div className="flex items-center gap-2 mb-2">
-                      <span className="text-2xl">🎬</span>
-                      <p className="text-gray-300 text-sm font-medium">Video + Audio</p>
-                    </div>
-                    <video
-                      controls
-                      className="w-full h-48 rounded-lg bg-black shadow-lg"
-                      src={getFileUrl(video.filepath.split('/').pop())}
-                    />
-                    <p className="text-gray-400 text-xs mt-2 flex items-center gap-1">
-                      <span>💾</span> {(video.size / 1024 / 1024).toFixed(2)} MB
-                    </p>
-                  </div>
-                )}
-
-                {audio && (
+                {rec.recordingType.includes('audio') ? (
                   <div>
                     <div className="flex items-center gap-2 mb-2">
                       <span className="text-2xl">🎵</span>
@@ -108,20 +81,30 @@ export default function ReviewPage() {
                     </div>
                     <audio
                       controls
-                      className="w-full h-10 rounded-lg"
-                      src={getFileUrl(audio.filepath.split('/').pop())}
+                      className="w-full rounded-lg"
+                      src={getFileUrl(rec.filepath.split('/').pop())}
                     />
-                    <p className="text-gray-400 text-xs mt-2 flex items-center gap-1">
-                      <span>💾</span> {(audio.size / 1024 / 1024).toFixed(2)} MB
-                    </p>
+                  </div>
+                ) : (
+                  <div>
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="text-2xl">🎬</span>
+                      <p className="text-gray-300 text-sm font-medium">Video</p>
+                    </div>
+                    <video
+                      controls
+                      className="w-full max-h-8 rounded-lg bg-black shadow-lg"
+                      src={getFileUrl(rec.filepath.split('/').pop())}
+                    />
                   </div>
                 )}
 
-                <div className="mt-4 pt-4 border-t border-gray-700">
-                  <p className="text-gray-500 text-xs flex items-center gap-1">
-                    <span>🕒</span> {new Date(video?.createdAt || audio?.createdAt).toLocaleString()}
-                  </p>
-                </div>
+                <p className="text-gray-400 text-xs mt-3 flex items-center gap-1">
+                  <span>💾</span> {(rec.size / 1024 / 1024).toFixed(2)} MB
+                </p>
+                <p className="text-gray-500 text-xs mt-2 flex items-center gap-1">
+                  <span>🕒</span> {new Date(rec.createdAt).toLocaleString()}
+                </p>
               </div>
             ))}
           </div>
