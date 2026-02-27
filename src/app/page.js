@@ -11,8 +11,13 @@ export default function Home() {
 
   const handleCreateMeeting = async () => {
     if (!userName) return alert('Enter your name');
-    const data = await createMeeting();
-    router.push(`/meet/${data.meetId}?name=${userName}&creator=true`);
+    try {
+      const data = await createMeeting();
+      router.push(`/meet/${data.meetId}?name=${userName}&creator=true`);
+    } catch (error) {
+      console.error('Error creating meeting:', error);
+      alert('Failed to create meeting. Backend server is not reachable. Please check if the backend is running.');
+    }
   };
 
   const handleJoinMeeting = () => {

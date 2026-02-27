@@ -1,10 +1,17 @@
 import axios from 'axios';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://videobe-production.up.railway.app';
+
+axios.defaults.timeout = 30000;
 
 export const createMeeting = async () => {
-  const response = await axios.post(`${API_URL}/api/meetings/create`);
-  return response.data;
+  try {
+    const response = await axios.post(`${API_URL}/api/meetings/create`);
+    return response.data;
+  } catch (error) {
+    console.error('API Error:', error.message);
+    throw new Error('Backend server is not responding. Please try again.');
+  }
 };
 
 export const getMeeting = async (meetId) => {
