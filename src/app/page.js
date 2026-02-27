@@ -26,21 +26,21 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-900">
-      <div className="bg-gray-800 p-8 rounded-lg shadow-xl w-96">
-        <h1 className="text-3xl font-bold text-white mb-6">MeetFlow</h1>
+    <div className="min-h-screen flex items-center justify-center bg-gray-900 p-4">
+      <div className="bg-gray-800 p-6 sm:p-8 rounded-lg shadow-xl w-full max-w-md">
+        <h1 className="text-2xl sm:text-3xl font-bold text-white mb-6">MeetFlow</h1>
         
         <input
           type="text"
           placeholder="Your Name"
           value={userName}
           onChange={(e) => setUserName(e.target.value)}
-          className="w-full p-3 mb-4 rounded bg-gray-700 text-white"
+          className="w-full p-3 mb-4 rounded bg-gray-700 text-white text-base"
         />
 
         <button
           onClick={handleCreateMeeting}
-          className="w-full bg-blue-600 text-white p-3 rounded mb-4 hover:bg-blue-700"
+          className="w-full bg-blue-600 text-white p-3 rounded mb-4 hover:bg-blue-700 active:bg-blue-800 text-base font-medium"
         >
           Create Meeting
         </button>
@@ -51,11 +51,11 @@ export default function Home() {
             placeholder="Meeting ID"
             value={meetId}
             onChange={(e) => setMeetId(e.target.value)}
-            className="flex-1 p-3 rounded bg-gray-700 text-white"
+            className="flex-1 p-3 rounded bg-gray-700 text-white text-base"
           />
           <button
             onClick={handleJoinMeeting}
-            className="bg-green-600 text-white px-6 rounded hover:bg-green-700"
+            className="bg-green-600 text-white px-4 sm:px-6 py-3 rounded hover:bg-green-700 active:bg-green-800 text-base font-medium whitespace-nowrap"
           >
             Join
           </button>
@@ -67,11 +67,11 @@ export default function Home() {
             placeholder="Review Meeting ID"
             value={reviewMeetId}
             onChange={(e) => setReviewMeetId(e.target.value)}
-            className="flex-1 p-3 rounded bg-gray-700 text-white"
+            className="flex-1 p-3 rounded bg-gray-700 text-white text-base"
           />
           <button
             onClick={handleReviewMeeting}
-            className="bg-purple-600 text-white px-6 rounded hover:bg-purple-700"
+            className="bg-purple-600 text-white px-4 sm:px-6 py-3 rounded hover:bg-purple-700 active:bg-purple-800 text-base font-medium whitespace-nowrap"
           >
             Review
           </button>
