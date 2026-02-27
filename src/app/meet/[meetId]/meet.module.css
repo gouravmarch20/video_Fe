@@ -1,0 +1,125 @@
+.container {
+  min-height: 100vh;
+  background: #111827;
+  padding: 1rem;
+}
+
+.wrapper {
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+.header {
+  background: #1f2937;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.headerInfo h2 {
+  color: white;
+  font-size: 1.25rem;
+  margin-bottom: 0.25rem;
+}
+
+.headerInfo p {
+  color: #9ca3af;
+}
+
+.headerActions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.btnRecord {
+  background: #dc2626;
+  color: white;
+  padding: 0.5rem 1.5rem;
+  border-radius: 0.375rem;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btnRecord:hover {
+  background: #b91c1c;
+}
+
+.btnRecord:disabled {
+  background: #4b5563;
+  cursor: not-allowed;
+}
+
+.btnStop {
+  background: #ca8a04;
+  color: white;
+  padding: 0.5rem 1.5rem;
+  border-radius: 0.375rem;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btnStop:hover {
+  background: #a16207;
+}
+
+.btnLeave {
+  background: #4b5563;
+  color: white;
+  padding: 0.5rem 1.5rem;
+  border-radius: 0.375rem;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btnLeave:hover {
+  background: #374151;
+}
+
+.videoGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.videoCard {
+  background: #1f2937;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.video {
+  width: 100%;
+  height: 24rem;
+  object-fit: cover;
+  background: black;
+}
+
+.videoLabel {
+  color: white;
+  text-align: center;
+  padding: 0.5rem;
+}
+
+.recordingBanner {
+  margin-top: 1rem;
+  background: #dc2626;
+  color: white;
+  padding: 0.75rem;
+  border-radius: 0.375rem;
+  text-align: center;
+}
+
+.warningBanner {
+  margin-top: 1rem;
+  background: #ca8a04;
+  color: white;
+  padding: 0.75rem;
+  border-radius: 0.375rem;
+  text-align: center;
+}

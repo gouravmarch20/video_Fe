@@ -1,0 +1,133 @@
+.container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #111827;
+  padding: 1rem;
+}
+
+.card {
+  background: #1f2937;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 28rem;
+}
+
+.title {
+  font-size: 1.875rem;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 1.5rem;
+}
+
+.input {
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border-radius: 0.375rem;
+  background: #374151;
+  color: white;
+  font-size: 1rem;
+  border: none;
+}
+
+.input::placeholder {
+  color: #9ca3af;
+}
+
+.btnPrimary {
+  width: 100%;
+  background: #2563eb;
+  color: white;
+  padding: 0.75rem;
+  border-radius: 0.375rem;
+  margin-bottom: 1rem;
+  font-weight: 500;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btnPrimary:hover {
+  background: #1d4ed8;
+}
+
+.btnPrimary:active {
+  background: #1e40af;
+}
+
+.inputGroup {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.inputFlex {
+  flex: 1;
+  padding: 0.75rem;
+  border-radius: 0.375rem;
+  background: #374151;
+  color: white;
+  font-size: 1rem;
+  border: none;
+}
+
+.inputFlex::placeholder {
+  color: #9ca3af;
+}
+
+.btnJoin {
+  background: #059669;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.375rem;
+  font-weight: 500;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s;
+}
+
+.btnJoin:hover {
+  background: #047857;
+}
+
+.btnJoin:active {
+  background: #065f46;
+}
+
+.btnReview {
+  background: #7c3aed;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.375rem;
+  font-weight: 500;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s;
+}
+
+.btnReview:hover {
+  background: #6d28d9;
+}
+
+.btnReview:active {
+  background: #5b21b6;
+}
+
+@media (min-width: 640px) {
+  .card {
+    padding: 2rem;
+  }
+  
+  .title {
+    font-size: 1.875rem;
+  }
+}

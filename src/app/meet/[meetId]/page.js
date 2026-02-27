@@ -4,6 +4,7 @@ import { useParams, useSearchParams } from 'next/navigation';
 import { io } from 'socket.io-client';
 import WebRTCService from '@/services/webrtc';
 import { saveRecording, endMeeting } from '@/services/api';
+import styles from './meet.module.css';
 
 export default function MeetPage() {
   const params = useParams();
@@ -159,20 +160,20 @@ export default function MeetPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 p-4">
-      <div className="max-w-6xl mx-auto">
-        <div className="bg-gray-800 p-4 rounded-lg mb-4 flex justify-between items-center">
-          <div>
-            <h2 className="text-white text-xl">Meeting: {meetId}</h2>
-            <p className="text-gray-400">{userName} {isCreator && '(Host)'}</p>
+    <div className={styles.container}>
+      <div className={styles.wrapper}>
+        <div className={styles.header}>
+          <div className={styles.headerInfo}>
+            <h2>Meeting: {meetId}</h2>
+            <p>{userName} {isCreator && '(Host)'}</p>
           </div>
-          <div className="flex gap-2">
+          <div className={styles.headerActions}>
             {isCreator && (
               !isRecording ? (
                 <button
                   onClick={startRecording}
                   disabled={!isRemoteConnected}
-                  className="bg-red-600 text-white px-6 py-2 rounded hover:bg-red-700 disabled:bg-gray-600 disabled:cursor-not-allowed"
+                  className={styles.btnRecord}
                 >
                   Start Recording
                 </button>
@@ -182,7 +183,7 @@ export default function MeetPage() {
                     await stopRecording();
                     alert('Recordings saved successfully!');
                   }}
-                  className="bg-yellow-600 text-white px-6 py-2 rounded hover:bg-yellow-700"
+                  className={styles.btnStop}
                 >
                   Stop Recording
                 </button>
@@ -190,46 +191,46 @@ export default function MeetPage() {
             )}
             <button
               onClick={handleEndMeeting}
-              className="bg-gray-600 text-white px-6 py-2 rounded hover:bg-gray-700"
+              className={styles.btnLeave}
             >
               Leave Meeting
             </button>
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-4">
-          <div className="bg-gray-800 rounded-lg overflow-hidden">
+        <div className={styles.videoGrid}>
+          <div className={styles.videoCard}>
             <video
               ref={localVideoRef}
               autoPlay
               muted
               playsInline
-              className="w-full h-96 object-cover bg-black"
+              className={styles.video}
             />
-            <p className="text-white text-center p-2">You ({userName})</p>
+            <p className={styles.videoLabel}>You ({userName})</p>
           </div>
 
-          <div className="bg-gray-800 rounded-lg overflow-hidden">
+          <div className={styles.videoCard}>
             <video
               ref={remoteVideoRef}
               autoPlay
               playsInline
-              className="w-full h-96 object-cover bg-black"
+              className={styles.video}
             />
-            <p className="text-white text-center p-2">
+            <p className={styles.videoLabel}>
               {remoteUser ? remoteUser.userName : 'Waiting for participant...'}
             </p>
           </div>
         </div>
 
         {isRecording && (
-          <div className="mt-4 bg-red-600 text-white p-3 rounded text-center">
+          <div className={styles.recordingBanner}>
             🔴 Recording in progress (6 files: A video+audio, A audio, B video+audio, B audio, AB video+audio, AB audio)
           </div>
         )}
 
         {!isRemoteConnected && isCreator && (
-          <div className="mt-4 bg-yellow-600 text-white p-3 rounded text-center">
+          <div className={styles.warningBanner}>
             ⚠️ Waiting for second participant to start recording
           </div>
         )}
